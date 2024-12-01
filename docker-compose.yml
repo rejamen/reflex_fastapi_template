@@ -1,0 +1,19 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+      - "3100:3100"
+    volumes:
+      - ./frontend:/app
+    depends_on:
+      - backend
+    environment:
+      - BACKEND_IP_ADDRESS=${BACKEND_IP_ADDRESS}
